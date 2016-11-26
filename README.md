@@ -4,4 +4,5 @@ I am learning about Reinforcement Learning from [this course](http://www0.cs.ucl
 
 # Included
 
- * [lecture_2](lecture_2) - use evolution to solve the simple example problem from the lecture.
+ * [lecture_2](lecture_2) - use evolution to solve the simple example problem from lecture 2.
+ * [lecture_3](lecture_3) - solving two example problems from lecture 3.
