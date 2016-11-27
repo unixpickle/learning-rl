@@ -44,7 +44,9 @@ func NewLotDist(returns, rentals float64, capacity int) *LotDist {
 				}
 			} else {
 				ret = ret[1:]
-				count++
+				if count < capacity {
+					count++
+				}
 			}
 		}
 		for len(rent) > 0 {
@@ -55,7 +57,9 @@ func NewLotDist(returns, rentals float64, capacity int) *LotDist {
 			rent = rent[1:]
 		}
 		for len(ret) > 0 {
-			count++
+			if count < capacity {
+				count++
+			}
 			ret = ret[1:]
 		}
 		res.Rewards[startCount] += reward
