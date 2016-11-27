@@ -4,7 +4,7 @@ import "math/rand"
 
 const (
 	RentReward     = 10
-	LotSampleCount = 10000
+	LotSampleCount = 5000000
 )
 
 // LotDist stores the distribution of things that could
