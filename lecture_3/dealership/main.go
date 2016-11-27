@@ -7,10 +7,11 @@ import (
 )
 
 const (
-	MaxMove  = 5
-	MaxIters = 100
-	Discount = 0.9
-	Epsilon  = 1e-2
+	MaxMove   = 5
+	MaxIters  = 100
+	Discount  = 0.9
+	Epsilon   = 1e-3
+	InitValue = 500
 )
 
 func main() {
@@ -23,7 +24,7 @@ func main() {
 	values := map[State]float64{}
 	for i := 0; i <= LotCapacity; i++ {
 		for j := 0; j <= LotCapacity; j++ {
-			values[State{i, j}] = 0
+			values[State{i, j}] = InitValue
 		}
 	}
 	log.Println("Value iteration...")
