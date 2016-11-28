@@ -30,7 +30,6 @@ func main() {
 	log.Println("Value iteration...")
 	for k := 0; k < MaxIters; k++ {
 		var maxChange float64
-		newVals := map[State]float64{}
 		for state, oldValue := range values {
 			var maxReward float64
 			for action := -MaxMove; action <= MaxMove; action++ {
@@ -45,10 +44,9 @@ func main() {
 			if change := math.Abs(maxReward - oldValue); change > maxChange {
 				maxChange = change
 			}
-			newVals[state] = maxReward
+			values[state] = maxReward
 		}
 		log.Println("Iteration", k, "max change:", maxChange)
-		values = newVals
 		if maxChange < Epsilon {
 			break
 		}
