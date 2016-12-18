@@ -4,7 +4,11 @@ import "fmt"
 
 func main() {
 	mcVal := MonteCarlo(500000, 1, 0.001, NaivePolicy{})
+	fmt.Println("Monte-Carlo:")
 	printValueFunc(mcVal)
+	tdVal := TDLambda(500000, 0.5, 1, 0.001, NaivePolicy{})
+	fmt.Println("TD(0.5)")
+	printValueFunc(tdVal)
 }
 
 func printValueFunc(val map[Observable]float64) {
