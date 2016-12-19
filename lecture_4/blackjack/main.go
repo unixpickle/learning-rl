@@ -3,10 +3,10 @@ package main
 import "fmt"
 
 func main() {
-	mcVal := MonteCarlo(500000, 1, 0.001, NaivePolicy{})
+	mcVal := MonteCarlo(500000, NaivePolicy{})
 	fmt.Println("Monte-Carlo:")
 	printValueFunc(mcVal)
-	tdVal := TDLambda(500000, 0.5, 1, 0.001, NaivePolicy{})
+	tdVal := TDLambda(500000, 0.5, 1, 0.00001, NaivePolicy{})
 	fmt.Println("TD(0.5)")
 	printValueFunc(tdVal)
 }

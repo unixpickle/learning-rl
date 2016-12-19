@@ -1,21 +1,23 @@
 package main
 
-func MonteCarlo(n int, startRate, endRate float64, p Policy) map[Observable]float64 {
+func MonteCarlo(n int, p Policy) map[Observable]float64 {
 	valFunc := map[Observable]float64{}
+	m := map[Observable]float64{}
 	for i := 0; i < n; i++ {
-		rate := startRate + (endRate-startRate)*float64(i)/float64(n)
-		recursiveMC(NewState(), rate, p, valFunc)
+		recursiveMC(NewState(), p, valFunc, m)
 	}
 	return valFunc
 }
 
-func recursiveMC(s *State, rate float64, p Policy, vf map[Observable]float64) float64 {
+func recursiveMC(s *State, p Policy, vf, n map[Observable]float64) float64 {
 	if s == nil {
 		return 0
 	}
 	a := p.Action(s.Observable)
 	reward, next := s.Timestep(a)
-	totalReward := recursiveMC(next, rate, p, vf) + float64(reward)
+	totalReward := recursiveMC(next, p, vf, n) + float64(reward)
+	n[s.Observable]++
+	rate := 1.0 / n[s.Observable]
 	vf[s.Observable] += rate * (totalReward - vf[s.Observable])
 	return totalReward
 }

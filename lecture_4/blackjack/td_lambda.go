@@ -1,9 +1,14 @@
 package main
 
+import "math"
+
 func TDLambda(n int, lambda, startRate, endRate float64, p Policy) map[Observable]float64 {
 	valFunc := map[Observable]float64{}
+	sr := math.Log(startRate)
+	er := math.Log(endRate)
 	for i := 0; i < n; i++ {
-		rate := startRate + (endRate-startRate)*float64(i)/float64(n)
+		r := sr + (er-sr)*float64(i)/float64(n)
+		rate := math.Exp(r)
 		trace := map[Observable]float64{}
 		td(rate, p, valFunc, trace, lambda)
 	}
