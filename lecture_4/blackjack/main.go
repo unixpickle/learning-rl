@@ -6,7 +6,7 @@ func main() {
 	mcVal := MonteCarlo(500000, NaivePolicy{})
 	fmt.Println("Monte-Carlo:")
 	printValueFunc(mcVal)
-	tdVal := TDLambda(500000, 0.5, 1, 0.00001, NaivePolicy{})
+	tdVal := TDLambda(500000, 0.5, 1, 1e-6, NaivePolicy{})
 	fmt.Println("TD(0.5)")
 	printValueFunc(tdVal)
 }
