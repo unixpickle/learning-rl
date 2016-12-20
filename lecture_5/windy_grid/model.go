@@ -69,11 +69,32 @@ func (s *State) Move(a Action) (reward float64, target *State) {
 	return -1, &res
 }
 
+type ActionState struct {
+	Action Action
+	State  State
+}
+
+// A QFunc is an action-state value function.
+type QFunc map[ActionState]float64
+
+// Policy derives the optimal policy.
+func (q QFunc) Policy() Policy {
+	res := Policy{}
+	for pair := range q {
+		if _, ok := res[pair.State]; ok {
+			continue
+		}
+		opt, _ := best(q, &pair.State)
+		res[pair.State] = opt
+	}
+	return res
+}
+
 func limitValue(x, max int) int {
 	if x < 0 {
 		x = 0
 	} else if x >= max {
-		x = max-1
+		x = max - 1
 	}
 	return x
 }

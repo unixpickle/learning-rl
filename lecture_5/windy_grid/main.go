@@ -24,19 +24,35 @@ func (p Policy) Print() {
 func main() {
 	rand.Seed(time.Now().UnixNano())
 	val := QFunc{}
+	for i := 0; i < 10000; i++ {
+		Sarsa(val, 0.5, 0.01, 0.01)
+	}
+	fmt.Println("Sarsa(0.5):")
+	val.Policy().Print()
+	fmt.Println("win steps:", policyWinSteps(val.Policy()))
+
+	fmt.Println()
+
+	val = QFunc{}
 	for i := 0; i < 100000; i++ {
 		QLearn(val, 0.001, 0.01)
 	}
+	fmt.Println("Q-learning:")
 	val.Policy().Print()
-	fmt.Println("policy works:", policyWorks(val.Policy()))
+	fmt.Println("win steps:", policyWinSteps(val.Policy()))
 }
 
-func policyWorks(p Policy) bool {
+func policyWinSteps(p Policy) int {
 	s := NewState()
 	seen := map[State]bool{}
+	var n int
 	for s != nil && !seen[*s] {
 		seen[*s] = true
 		_, s = s.Move(p[*s])
+		n++
 	}
-	return s == nil
+	if s != nil {
+		return -1
+	}
+	return n
 }

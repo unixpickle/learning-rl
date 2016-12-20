@@ -2,27 +2,6 @@ package main
 
 import "math/rand"
 
-type ActionState struct {
-	Action Action
-	State  State
-}
-
-// A QFunc is an action-state value function.
-type QFunc map[ActionState]float64
-
-// Policy derives the optimal policy.
-func (q QFunc) Policy() Policy {
-	res := Policy{}
-	for pair := range q {
-		if _, ok := res[pair.State]; ok {
-			continue
-		}
-		opt, _ := best(q, &pair.State)
-		res[pair.State] = opt
-	}
-	return res
-}
-
 // QLearn performs one episode of Q-learning.
 func QLearn(q QFunc, step, epsilon float64) {
 	s := NewState()

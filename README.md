@@ -7,3 +7,4 @@ I am learning about Reinforcement Learning from [this course](http://www0.cs.ucl
  * [lecture_2](lecture_2) - use evolution to solve the simple example problem from lecture 2.
  * [lecture_3](lecture_3) - solving two example problems from lecture 3.
  * [lecture_4](lecture_4) - model-free policy evaluation methods
+ * [lecture_5](lecture_5) - trying Sarsa and Q-learning
